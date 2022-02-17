@@ -15,7 +15,16 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid('user_uuid');
+            $table->foreignUuid('order_status_uuid');
+            $table->foreignUuid('payment_uuid');
+            $table->uuid();
+            $table->json('products');
+            $table->json('address');
+            $table->float('delivery_fee')->nullable();
+            $table->float('amount')->unique();
             $table->timestamps();
+            $table->timestamp('shipped_at')->nullable();
         });
     }
 

@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
+            $table->string('title');
+            $table->string('slug');
+            $table->float('content');
+            $table->json('metadata');
             $table->timestamps();
         });
     }

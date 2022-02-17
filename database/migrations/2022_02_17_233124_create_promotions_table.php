@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
+            $table->string('title');
+            $table->float('content');
+            $table->json('metadata');
             $table->timestamps();
         });
     }
