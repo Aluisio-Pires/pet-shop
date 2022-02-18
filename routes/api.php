@@ -67,6 +67,13 @@ Route::group([
         Route::get('/main/blog', 'index')->name('post.index');
         Route::get('/main/blog/{post}', 'show')->name('post.show');
     });
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/products', 'index')->name('product.index');
+        Route::get('/product/{product}', 'show')->name('product.show');
+        Route::post('/product/create', 'store')->name('product.store');
+        Route::put('/product/{product}', 'update')->name('product.update');
+        Route::delete('/product/{product}', 'destroy')->name('product.destroy');
+    });
     //user and admin controllers
 
 });
