@@ -52,6 +52,13 @@ Route::group([
         Route::put('/brand/{brand}', 'update')->name('brand.update');
         Route::delete('/brand/{brand}', 'destroy')->name('brand.destroy');
     });
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/categories', 'index')->name('category.index');
+        Route::get('/category/{category}', 'show')->name('category.show');
+        Route::post('/category/create', 'store')->name('category.store');
+        Route::put('/category/{category}', 'update')->name('category.update');
+        Route::delete('/category/{category}', 'destroy')->name('category.destroy');
+    });
     //user and admin controllers
 
 });
