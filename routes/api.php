@@ -77,6 +77,16 @@ Route::group([
     Route::controller(PromotionController::class)->group(function () {
         Route::get('/main/promotions', 'index')->name('promotion.index');
     });
+    Route::controller(OrderController::class)->group(function () {
+        Route::get('/orders', 'index')->name('order.index');
+        Route::get('/orders/shipment-locator', 'locator')->name('order.locator');
+        Route::get('/orders/dashboard', 'dashboard')->name('order.dashboard');
+        Route::get('/order/{uuid}/download', 'download')->name('order.download');
+        Route::get('/order/{order}', 'show')->name('order.show');
+        Route::post('/order/create', 'store')->name('order.store');
+        Route::put('/order/{order}', 'update')->name('order.update');
+        Route::delete('/order/{order}', 'destroy')->name('order.destroy');
+    });
     //user and admin controllers
 
 });
