@@ -74,6 +74,9 @@ Route::group([
         Route::put('/product/{product}', 'update')->name('product.update');
         Route::delete('/product/{product}', 'destroy')->name('product.destroy');
     });
+    Route::controller(PromotionController::class)->group(function () {
+        Route::get('/main/promotions', 'index')->name('promotion.index');
+    });
     //user and admin controllers
 
 });
