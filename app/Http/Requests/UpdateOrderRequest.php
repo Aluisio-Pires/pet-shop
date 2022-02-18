@@ -13,7 +13,7 @@ class UpdateOrderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdateOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_uuid' => 'required|uuid|exists:users,uuid',
+            'order_status_uuid' => 'required|uuid|exists:order_statuses,uuid',
+            'payment_uuid' => 'required|uuid|exists:payments,uuid',
+            'products' => 'required|json',
+            'address' => 'required|json',
         ];
     }
 }
