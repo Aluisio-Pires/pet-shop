@@ -59,6 +59,10 @@ Route::group([
         Route::put('/category/{category}', 'update')->name('category.update');
         Route::delete('/category/{category}', 'destroy')->name('category.destroy');
     });
+    Route::controller(FileController::class)->group(function () {
+        Route::get('/file/{file}', 'show')->name('file.show');
+        Route::post('/file/upload', 'store')->name('file.store');
+    });
     //user and admin controllers
 
 });
