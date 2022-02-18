@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group([
+/*Route::group([
     'prefix' => 'v1',
 ], function (){
     Route::apiResources([
@@ -41,4 +41,17 @@ Route::group([
         'order_statuses' => OrderStatusController::class,
         'payments' => PaymentController::class,
     ]);
+});*/
+Route::group([
+    'prefix' => 'v1',
+], function (){
+    Route::controller(BrandController::class)->group(function () {
+        Route::get('/brands', 'index')->name('brand.index');
+        Route::get('/brand/{brand}', 'show')->name('brand.show');
+        Route::post('/brand/create', 'store')->name('brand.store');
+        Route::put('/brand/{brand}', 'update')->name('brand.update');
+        Route::delete('/brand/{brand}', 'destroy')->name('brand.destroy');
+    });
+    //user and admin controllers
+
 });
