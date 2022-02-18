@@ -87,6 +87,13 @@ Route::group([
         Route::put('/order/{order}', 'update')->name('order.update');
         Route::delete('/order/{order}', 'destroy')->name('order.destroy');
     });
+    Route::controller(OrderStatusController::class)->group(function () {
+        Route::get('/order-statuses', 'index')->name('order-status.index');
+        Route::get('/order-status/{orderStatus}', 'show')->name('order-status.show');
+        Route::post('/order-status/create', 'store')->name('order-status.store');
+        Route::put('/order-status/{orderStatus}', 'update')->name('order-status.update');
+        Route::delete('/order-status/{orderStatus}', 'destroy')->name('order-status.destroy');
+    });
     //user and admin controllers
 
 });
