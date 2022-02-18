@@ -63,6 +63,10 @@ Route::group([
         Route::get('/file/{file}', 'show')->name('file.show');
         Route::post('/file/upload', 'store')->name('file.store');
     });
+    Route::controller(PostController::class)->group(function () {
+        Route::get('/main/blog', 'index')->name('post.index');
+        Route::get('/main/blog/{post}', 'show')->name('post.show');
+    });
     //user and admin controllers
 
 });
