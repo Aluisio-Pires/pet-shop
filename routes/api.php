@@ -94,6 +94,13 @@ Route::group([
         Route::put('/order-status/{orderStatus}', 'update')->name('order-status.update');
         Route::delete('/order-status/{orderStatus}', 'destroy')->name('order-status.destroy');
     });
+    Route::controller(PaymentController::class)->group(function () {
+        Route::get('/payments', 'index')->name('payment.index');
+        Route::get('/payment/{payment}', 'show')->name('payment.show');
+        Route::post('/payment/create', 'store')->name('payment.store');
+        Route::put('/payment/{payment}', 'update')->name('payment.update');
+        Route::delete('/payment/{payment}', 'destroy')->name('payment.destroy');
+    });
     //user and admin controllers
 
 });
