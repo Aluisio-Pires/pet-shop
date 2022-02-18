@@ -58,4 +58,8 @@ class User extends Authenticatable
     public function orders(){
         $this->hasMany(Order::class);
     }
+
+    public function jwtTokens(){
+        $this->hasMany(JwtToken::class);
+    }
 }
