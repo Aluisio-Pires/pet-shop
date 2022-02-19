@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('unique_id');
             $table->string('token_title');
             $table->boolean('restrictions')->nullable()->default(0);
-            $table->string('permissions');
+            $table->string('permissions')->nullable();
             $table->timestamps();
             $table->timestamp('expires_at')->nullable();
             $table->timestamp('last_used_at')->nullable();
