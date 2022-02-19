@@ -21,7 +21,7 @@ class LoginController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function authenticate(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -30,8 +30,9 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            $user = User::where('id',auth()->id());
+            $user = User::where('id',auth()->id())->get();
             $token = $this->token($user);
+            session(['jwt_token' => $token->toString()]);
             return response()->json($token, 200);
         }
 
@@ -40,7 +41,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        $token = JwtToken::where('token_title', session()->get('jwt_token'));
+        $token = JwtToken::where('token_title', session()->get('jwt_token'))->get();
         $token->delete();
 
         Auth::logout();
@@ -74,7 +75,6 @@ class LoginController extends Controller
             'refreshed_at' => CarbonImmutable::now(),
         ]);
         $jwt->save();
-        session(['jwt_token' => $token->toString()]);
 
 
         return $token;
@@ -86,7 +86,7 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
         ]);
 
-        $user = User::where('email', $email);
+        $user = User::where('email', $email)->get();
         $token = $this->token($user)->toString();
         return response()->json(['jwt_token' => $token], 200);
     }
@@ -99,8 +99,8 @@ class LoginController extends Controller
             'token' => ['required', 'string'],
         ]);
 
-        $user = User::where('email', $email);
-        $token = JwtToken::where('token_title', $request->token);
+        $user = User::where('email', $email)->get();
+        $token = JwtToken::where('token_title', $request->token)->get();
 
         if($token->user_id === $user->id){
             $user->update([
