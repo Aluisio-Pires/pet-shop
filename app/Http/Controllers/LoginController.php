@@ -1,11 +1,23 @@
 <?php
 
+/*
+ * The Lcobucci\JWT\ library doesn't work in Laravel 9
+ * This controller isn't called in anywhere
+ * Just ignore this file while the library is updating
+ * A "Laravel way" library is used to handle authentication in AuthController: JwtToken
+ * You can find the JwtToken documentation in https://laravel-jwt-auth.readthedocs.io/en/latest/
+ *
+ * */
+
+
+
+
+
 namespace App\Http\Controllers;
 
 use App\Models\JwtToken;
 use App\Models\User;
 use Carbon\CarbonImmutable;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Lcobucci\JWT\Configuration;
@@ -52,7 +64,7 @@ class LoginController extends Controller
         return response()->json(['logout' => 'Ok'], 200);
     }
 
-    public function token(User $user){
+    public function newToken(User $user){
         $config = Configuration::forAsymmetricSigner(
             new Signer\Rsa\Sha256(),
             InMemory::plainText(env('JWT_SECRET', 'yMjckoQO1hPPeiSBq2FaEeA0DKdhynrGZKeC5bldL4xAAzuiL8WmqLfMAmQ74dqM')),
@@ -109,10 +121,4 @@ class LoginController extends Controller
         }
         return response()->json(['user' => $user], 200);
     }
-
-
-
-
-
-
 }

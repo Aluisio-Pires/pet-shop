@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FileController;
@@ -50,7 +51,7 @@ Route::group([
     Route::controller(BrandController::class)->group(function () {
         Route::get('/brands', 'index')->name('brand.index');
         Route::get('/brand/{brand}', 'show')->name('brand.show');
-        Route::middleware('auth')->group(function () {
+        Route::middleware('api')->group(function () {
             Route::post('/brand/create', 'store')->name('brand.store');
             Route::put('/brand/{brand}', 'update')->name('brand.update');
             Route::delete('/brand/{brand}', 'destroy')->name('brand.destroy');
@@ -60,7 +61,7 @@ Route::group([
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/categories', 'index')->name('category.index');
         Route::get('/category/{category}', 'show')->name('category.show');
-        Route::middleware('auth')->group(function () {
+        Route::middleware('api')->group(function () {
             Route::post('/category/create', 'store')->name('category.store');
             Route::put('/category/{category}', 'update')->name('category.update');
             Route::delete('/category/{category}', 'destroy')->name('category.destroy');
@@ -80,7 +81,7 @@ Route::group([
     Route::controller(ProductController::class)->group(function () {
         Route::get('/products', 'index')->name('product.index');
         Route::get('/product/{product}', 'show')->name('product.show');
-        Route::middleware('auth')->group(function () {
+        Route::middleware('api')->group(function () {
             Route::post('/product/create', 'store')->name('product.store');
             Route::put('/product/{product}', 'update')->name('product.update');
             Route::delete('/product/{product}', 'destroy')->name('product.destroy');
@@ -91,7 +92,7 @@ Route::group([
         Route::get('/main/promotions', 'index')->name('promotion.index');
     });
 
-    Route::middleware('auth')->controller(OrderController::class)->group(function () {
+    Route::middleware('api')->controller(OrderController::class)->group(function () {
         Route::get('/orders', 'index')->name('order.index');
         Route::get('/orders/shipment-locator', 'locator')->name('order.locator');
         Route::get('/orders/dashboard', 'dashboard')->name('order.dashboard');
@@ -105,14 +106,14 @@ Route::group([
     Route::controller(OrderStatusController::class)->group(function () {
         Route::get('/order-statuses', 'index')->name('order-status.index');
         Route::get('/order-status/{orderStatus}', 'show')->name('order-status.show');
-        Route::middleware('auth')->group(function () {
+        Route::middleware('api')->group(function () {
             Route::post('/order-status/create', 'store')->name('order-status.store');
             Route::put('/order-status/{orderStatus}', 'update')->name('order-status.update');
             Route::delete('/order-status/{orderStatus}', 'destroy')->name('order-status.destroy');
         });
     });
 
-    Route::middleware('auth')->controller(PaymentController::class)->group(function () {
+    Route::middleware('api')->controller(PaymentController::class)->group(function () {
         Route::get('/payments', 'index')->name('payment.index');
         Route::get('/payment/{payment}', 'show')->name('payment.show');
         Route::post('/payment/create', 'store')->name('payment.store');
@@ -121,9 +122,9 @@ Route::group([
     });
 
     Route::controller(UserController::class)->group(function () {
-        Route::post('/admin/create', 'store')->name('admin.create');
-        Route::post('/user/create', 'store')->name('user.create');
-        Route::middleware('auth')->group(function () {
+        Route::post('/admin/create', 'storeAdmin')->name('admin.create');
+        Route::post('/user/create', 'storeUser')->name('user.create');
+        Route::middleware('api')->group(function () {
             Route::get('/admin/user-listing', 'index')->name('admin.index');
             Route::delete('/admin/user-delete/{user}', 'destroy')->name('user.destroy');
             Route::post('/user', 'userData')->name('user.userData');
@@ -133,14 +134,17 @@ Route::group([
         });
     });
 
-    Route::controller(LoginController::class)->group(function () {
+    Route::middleware('api')->controller(AuthController::class)->group(function () {
         Route::post('/admin/login', 'login')->name('admin.login');
         Route::get('/admin/logout', 'logout')->name('admin.logout');
         Route::post('/user/login', 'login')->name('user.login');
         Route::get('/user/logout', 'logout')->name('user.logout');
+    });
+
+
+    Route::controller(AuthController::class)->group(function () {
         Route::post('/user/forgot-password', 'forgotPass')->name('user.forgot');
         Route::delete('/user/reset-password-token', 'resetPass')->name('user.reset');
     });
-
 
 });

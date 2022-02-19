@@ -13,7 +13,8 @@
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
-        "lcobucci/jwt": "^4.1"
+        "lcobucci/jwt": "^4.1",
+        "php-open-source-saver/jwt-auth": "^1.4"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

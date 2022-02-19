@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -108,9 +110,9 @@ class UserController extends Controller
         $request->validate([
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string'],
-            'password_confirmation ' => ['required_with:password','same:password', 'string'],
+            'password_confirmation' => ['required_with:password','same:password', 'string'],
             'avatar' => ['string'],
             'address' => ['required', 'string'],
             'phone_number' => ['required', 'string'],
@@ -122,7 +124,7 @@ class UserController extends Controller
             'last_name' => $request->last_name,
             'is_admin' => 0,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'avatar' => $request->avatar,
             'address' => $request->address,
             'phone_number' => $request->phone_number,
@@ -144,9 +146,9 @@ class UserController extends Controller
         $request->validate([
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string'],
-            'password_confirmation ' => ['required_with:password','same:password', 'string'],
+            'password_confirmation' => ['required_with:password','same:password', 'string'],
             'avatar' => ['string'],
             'address' => ['required', 'string'],
             'phone_number' => ['required', 'string'],
@@ -158,7 +160,7 @@ class UserController extends Controller
             'last_name' => $request->last_name,
             'is_admin' => 1,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'avatar' => $request->avatar,
             'address' => $request->address,
             'phone_number' => $request->phone_number,
@@ -208,9 +210,9 @@ class UserController extends Controller
         $request->validate([
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string'],
-            'password_confirmation ' => ['required_with:password','same:password', 'string'],
+            'password_confirmation' => ['required_with:password','same:password', 'string'],
             'avatar' => ['string'],
             'address' => ['required', 'string'],
             'phone_number' => ['required', 'string'],
@@ -220,7 +222,7 @@ class UserController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'avatar' => $request->avatar,
             'address' => $request->address,
             'phone_number' => $request->phone_number,
