@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid();
             $table->string('title');
             $table->string('slug');
-            $table->float('content');
+            $table->text('content');
             $table->json('metadata');
             $table->timestamps();
         });

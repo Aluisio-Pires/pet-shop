@@ -26,7 +26,7 @@ class StorePostRequest extends FormRequest
         return [
             'title' => 'required|string',
             'slug' => 'required|string',
-            'content' => 'required|float',
+            'content' => 'required|string',
             'metadata' => 'required|json',
         ];
     }

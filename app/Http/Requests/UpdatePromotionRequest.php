@@ -25,7 +25,7 @@ class UpdatePromotionRequest extends FormRequest
     {
         return [
             'title' => 'required|string',
-            'content' => 'required|float',
+            'content' => 'required|string',
             'metadata' => 'required|json',
         ];
     }
