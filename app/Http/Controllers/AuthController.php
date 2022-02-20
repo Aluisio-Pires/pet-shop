@@ -54,6 +54,8 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        $token = request()->bearerToken();
+        JwtToken::where('token_title',$token)->delete();
         auth()->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
@@ -102,9 +104,9 @@ class AuthController extends Controller
             'email' => ['required', 'email'],
         ]);
 
-        $user = User::where('email', $email)->get();
-        $token = auth()->tokenById($user->id);
+        $user = User::where('email', $email)->first();
 
+        $token = auth()->tokenById($user->id);
         $jwt = new JwtToken([
             'user_id' => $user->id,
             'unique_id' => md5(CarbonImmutable::now()),
@@ -128,8 +130,8 @@ class AuthController extends Controller
             'token' => ['required', 'string'],
         ]);
 
-        $user = User::where('email', $email)->get();
-        $token = JwtToken::where('token_title', $request->token)->get();
+        $user = User::where('email', $email)->first();
+        $token = JwtToken::where('token_title', $request->token)->first();
 
         if($token->user_id === $user->id){
             $user->update([

@@ -65,7 +65,7 @@ class FileController extends Controller
             'type' => $image->extension(),
         ]);
 
-        return response()->json($image, 200);
+        return response()->json($file, 200);
     }
 
     /**
