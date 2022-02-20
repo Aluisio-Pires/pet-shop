@@ -91,7 +91,7 @@ class BrandController extends Controller
      *
      * @param  \App\Http\Requests\UpdateBrandRequest  $request
      * @param  \App\Models\Brand  $brand
-     * @return Brand
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(UpdateBrandRequest $request, Brand $brand)
     {
@@ -99,7 +99,7 @@ class BrandController extends Controller
             'title' => $request->title,
             'slug' => $request->slug,
         ]);
-        return $brand;
+        return response()->json($brand, 200);
     }
 
     /**

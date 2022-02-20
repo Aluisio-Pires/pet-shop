@@ -126,7 +126,7 @@ class UserController extends Controller
         ]);
         $user->save();
 
-        return response()->json($user, 200);
+        return response()->json($user, 201);
     }
 
     /**
@@ -162,7 +162,7 @@ class UserController extends Controller
         ]);
         $user->save();
 
-        return response()->json($user, 200);
+        return response()->json($user, 201);
     }
 
     /**

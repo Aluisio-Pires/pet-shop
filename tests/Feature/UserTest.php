@@ -32,7 +32,7 @@ class UserTest extends TestCase
 
         $response = $this->post('/api/v1/user/create', $user);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
     }
     public function test_updating_user_in_database()
     {
@@ -104,7 +104,7 @@ class UserTest extends TestCase
 
         $response = $this->post('/api/v1/admin/create', $user);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
     }
     public function test_get_user_list_from_database()
     {
