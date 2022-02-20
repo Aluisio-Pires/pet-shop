@@ -59,13 +59,13 @@ class FileController extends Controller
         $image_urn = $image->store('pet-shop');
 
         $file = new File([
-            'nome' => $request->nome,
+            'name' => $request->name,
             'path' => $image_urn,
             'size' => $image->getSize(),
             'type' => $image->extension(),
         ]);
 
-        return response()->json($file, 200);
+        return response()->json($file, 201);
     }
 
     /**
