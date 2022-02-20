@@ -97,7 +97,7 @@ class OrderController extends Controller
      */
     public function download(string $uuid)
     {
-        $order = Order::where('uuid', $uuid)->with('user', 'orderStatus', 'payment')->get();
+        $order = Order::where('uuid', $uuid)->with('user', 'orderStatus', 'payment')->first();
         $data = [
             'pdfName' =>$order->uuid,
             'store' => 'Store Name',
@@ -138,7 +138,7 @@ class OrderController extends Controller
         $fee=0;
         $products = json_decode($request->products);
         foreach ($products as $product){
-            $item = Product::where('uuid', $product->product)->get();
+            $item = Product::where('uuid', $product->product)->first();
             if($item->price){
                 $amount = $amount + ($item->price*$product->quantity);
             }
@@ -195,7 +195,7 @@ class OrderController extends Controller
         $fee=0;
         $products = json_decode($request->products);
         foreach ($products as $product){
-            $item = Product::where('uuid', $product->product)->get();
+            $item = Product::where('uuid', $product->product)->first();
             if($item->price){
                 $amount = $amount + ($item->price*$product->quantity);
             }

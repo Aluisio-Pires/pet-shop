@@ -77,7 +77,7 @@ class UserController extends Controller
         $order='asc';
         $column ='created_at';
 
-        $user = User::where('id', auth()->id())->get();
+        $user = User::where('id', auth()->id())->first();
 
 
         if ($request->desc === 'true'){
@@ -202,11 +202,11 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request)
     {
-        $user = User::where('id', auth()->id())->get();
+        $user = User::where('id', auth()->id())->first();
         $request->validate([
             'first_name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
@@ -229,7 +229,7 @@ class UserController extends Controller
             'is_marketing' => $request->is_marketing,
         ]);
 
-
+        return response()->json(['user' => $user], 200);
     }
 
     /**
@@ -256,15 +256,14 @@ class UserController extends Controller
      */
     public function destroyMe()
     {
-        $user = User::where('id', auth()->id())->get();
-        $user->delete();
+        User::where('id', auth()->id())->delete();
         return response()->json(['OK' => 'deleted'], 200);
     }
 
 
     public function admin()
     {
-        $user = User::where('id', auth()->id())->get();
+        $user = User::where('id', auth()->id())->first();
         if($user->is_admin){
             return true;
         }else{
