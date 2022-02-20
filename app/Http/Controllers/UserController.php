@@ -28,12 +28,6 @@ class UserController extends Controller
         }
         $model = User::orderBy($column, $order);
 
-        if ($request->has('limit')) {
-            $model = $model->take($request->limit)->get();
-        } else {
-            $model = $model->paginate();
-        }
-
         if ($request->has('first_name')) {
             $model = $model->where('first_name', $request->first_name);
         }
