@@ -50,7 +50,7 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
-     * @return Category
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreCategoryRequest $request)
     {
@@ -60,7 +60,7 @@ class CategoryController extends Controller
         ]);
         $category->save();
 
-        return $category;
+        return response()->json($category, 201);
     }
 
     /**
