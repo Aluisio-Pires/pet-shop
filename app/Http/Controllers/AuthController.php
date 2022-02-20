@@ -8,6 +8,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -135,7 +136,7 @@ class AuthController extends Controller
 
         if($token->user_id === $user->id){
             $user->update([
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
             ]);
         }
         return response()->json(['user' => $user], 200);

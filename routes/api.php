@@ -144,7 +144,7 @@ Route::group([
 
     Route::controller(AuthController::class)->group(function () {
         Route::post('/user/forgot-password', 'forgotPass')->name('user.forgot');
-        Route::delete('/user/reset-password-token', 'resetPass')->name('user.reset');
+        Route::put('/user/reset-password-token', 'resetPass')->name('user.reset');
     });
 
 });
