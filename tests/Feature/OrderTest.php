@@ -134,5 +134,16 @@ class OrderTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_download()
+    {
+        $this->withoutExceptionHandling();
+
+        $order = Order::factory()->create();
+
+        $response = $this->get('/api/v1/order/'.$order->uuid.'/download');
+
+        $response->assertStatus(200);
+    }
+
 
 }
