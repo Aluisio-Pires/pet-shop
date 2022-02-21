@@ -136,7 +136,7 @@ class OrderController extends Controller
     {
         $amount=0;
         $fee=0;
-        $products = json_decode($request->products);
+        $products[] = json_decode($request->products);
         foreach ($products as $product){
             $item = Product::where('uuid', $product->product)->first();
             if($item->price){
@@ -193,7 +193,7 @@ class OrderController extends Controller
     {
         $amount=0;
         $fee=0;
-        $products = json_decode($request->products);
+        $products[] = json_decode($request->products);
         foreach ($products as $product){
             $item = Product::where('uuid', $product->product)->first();
             if($item->price){
