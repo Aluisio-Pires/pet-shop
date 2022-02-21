@@ -50,7 +50,7 @@ class OrderStatusController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreOrderStatusRequest  $request
-     * @return OrderStatus
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreOrderStatusRequest $request)
     {
@@ -58,7 +58,7 @@ class OrderStatusController extends Controller
             'title' => $request->title,
         ]);
         $status->save();
-        return $status;
+        return response()->json($status, 201);
     }
 
     /**
