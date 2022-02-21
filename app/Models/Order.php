@@ -27,12 +27,12 @@ class Order extends Model
     ];
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'uuid');
     }
     public function orderStatus(){
-        return $this->belongsTo(OrderStatus::class);
+        return $this->belongsTo(OrderStatus::class, 'uuid');
     }
     public function payment(){
-        return $this->belongsTo(Payment::class);
+        return $this->belongsTo(Payment::class, 'uuid');
     }
 }

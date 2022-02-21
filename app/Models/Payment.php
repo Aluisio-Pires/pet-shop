@@ -21,6 +21,6 @@ class Payment extends Model
     ];
 
     public function orders(){
-        $this->hasMany(Order::class);
+        $this->hasMany(Order::class,'uuid');
     }
 }

@@ -18,7 +18,7 @@ class OrderStatusFactory extends Factory
     public function definition()
     {
         return [
-            'title' => Str::random(10),
+            'title' => 'shipped',
         ];
     }
 }

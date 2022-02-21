@@ -111,4 +111,28 @@ class OrderTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_shipment_locator()
+    {
+        $this->withoutExceptionHandling();
+
+        Order::factory()->count(10)->create();
+
+        $response = $this->get('/api/v1/orders/shipment-locator');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_dashboard()
+    {
+        $this->withoutExceptionHandling();
+
+        Order::factory()->count(10)->create();
+
+        $response = $this->get('/api/v1/orders/dashboard');
+
+        $response->assertStatus(200);
+    }
+
+
 }

@@ -78,7 +78,9 @@ class OrderController extends Controller
             $column = $request->sortBy;
         }
         $model = Order::orderBy($column, $order)->with('user', 'orderStatus', 'payment')
-            ->where('orderStatus.title', 'shipped');
+            ->whereHas('orderStatus', function($query) {
+                $query->where('title', 'shipped');
+            });
 
         if ($request->has('orderUuid')) {
             $model = $model->where('uuid', $request->orderUuid);
