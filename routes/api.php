@@ -134,17 +134,15 @@ Route::group([
         });
     });
 
-    Route::middleware('api')->controller(AuthController::class)->group(function () {
-        Route::post('/admin/login', 'login')->name('admin.login');
-        Route::get('/admin/logout', 'logout')->name('admin.logout');
-        Route::post('/user/login', 'login')->name('user.login');
-        Route::get('/user/logout', 'logout')->name('user.logout');
-    });
-
-
     Route::controller(AuthController::class)->group(function () {
         Route::post('/user/forgot-password', 'forgotPass')->name('user.forgot');
         Route::put('/user/reset-password-token', 'resetPass')->name('user.reset');
+        Route::middleware('api')->group(function () {
+            Route::post('/admin/login', 'login')->name('admin.login');
+            Route::get('/admin/logout', 'logout')->name('admin.logout');
+            Route::post('/user/login', 'login')->name('user.login');
+            Route::get('/user/logout', 'logout')->name('user.logout');
+        });
     });
 
 });

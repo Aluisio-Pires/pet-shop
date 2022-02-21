@@ -50,7 +50,7 @@ class PaymentController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StorePaymentRequest  $request
-     * @return Payment
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StorePaymentRequest $request)
     {
@@ -59,7 +59,7 @@ class PaymentController extends Controller
             'details' =>$request->details,
         ]);
         $payment->save();
-        return $payment;
+        return response()->json($payment, 201);
     }
 
     /**
