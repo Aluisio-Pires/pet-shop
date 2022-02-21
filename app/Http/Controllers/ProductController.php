@@ -50,7 +50,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreProductRequest  $request
-     * @return Product
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(StoreProductRequest $request)
     {
@@ -62,7 +62,7 @@ class ProductController extends Controller
             'metadata' => $request->metadata,
         ]);
         $product->save();
-        return $product;
+        return response()->json($product, 201);
     }
 
     /**

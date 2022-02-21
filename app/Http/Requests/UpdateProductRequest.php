@@ -26,8 +26,8 @@ class UpdateProductRequest extends FormRequest
         return [
             'category_uuid' => 'required|uuid|exists:categories,uuid',
             'title' => 'required|string',
-            'price' => 'required|float',
-            'description' => 'required|text',
+            'price' => 'required|numeric',
+            'description' => 'required|string',
             'metadata' => 'required|json',
         ];
     }
